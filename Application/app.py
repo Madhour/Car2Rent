@@ -67,6 +67,7 @@ def list_cars():
 def manager_dashboard():
     branch, bRevenue = qSalesPerBranch()
     employee, eRevenue, eSales = qSalesPerEmployee()
+    print(branch)
     return render_template('manager_dashboard.html', branch=branch, bRevenue=bRevenue, employee=employee, eRevenue=eRevenue, eSales=eSales)
 
 #Queries
@@ -130,9 +131,9 @@ def cNewAddress():
     city="manchester"
     country="england"
     zipcode="1234"
-    listCustomers = engine.execute("INSERT INTO ADDRESSES (s_street, s_house_number, s_city, s_country, n_zipcode) VALUES (?, ?, ?, ?, ?)", street, houseno, city, country, zipcode)
+    #listCustomers = engine.execute("INSERT INTO ADDRESSES (s_street, s_house_number, s_city, s_country, n_zipcode) VALUES (?, ?, ?, ?, ?)", street, houseno, city, country, zipcode)
 
-    return listCustomers
+    return 
 
 def cNewCustomer(fname, lname, dob, license, address):
     #creates address in address id
