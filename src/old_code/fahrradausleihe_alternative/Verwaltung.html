@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="lib/bootstrap_v4.min.css">
+
+    <title>Verwaltung</title>
+	
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="lib/jquery_v3.2.1.min.js"></script>
+    <script src="lib/popper_v1.12.9.min.js"></script>
+    <script src="lib/bootstrap_v4.min.js" ></script>
+	<script src="lib/elaspix_lookupDropdown.js" ></script>
+	<script src="lib/elaspix_inputtext.js" ></script>
+	<script src="lib/elaspix_eventclock.js" ></script>
+	<script src="lib/elaspix_dropdown_desktop.js" ></script>
+	<script src="lib/elaspix_verwaltung.js" ></script>	
+	<script src="lib/jquery.md5.js" ></script>
+	
+  </head>
+  <body>
+    <div class="container">
+		<div class="jumbotron mt-4">
+		  <h1 class="display-4">Verwaltung</h1>
+		  <p class="lead">Fahrräder und Stationen anlegen.</p>		  
+		</div>
+		<div id="parent"></div>
+	</div>
+	
+	<script>
+		var verwaltung;
+		$(function(){
+			verwaltung=createVerwaltung({
+					"parent":$("#parent"),
+					"onCreateStation":onCreateStation,
+					"onCreateBike":onCreateBike
+			});
+		//verwaltung.setStations({"Station1Key":"Name Station 1","Station2Key":"Name Station 2"});
+		loadList(verwaltung)
+		});
+
+		function loadList(listName) {
+            list = {};
+            $.getJSON("https://webtechlecture.appspot.com/cloudstore/listkeys?owner=19_stationen", function(data) {
+            for (let index = 0; index < data.length; index++) {
+            //list.push(data[index].key)
+			list[data[index].key] = data[index].key
+            }
+                listName.setStations(list);
+            });     
+        };
+		
+		function onCreateStation(aStationName)
+		{
+			console.log("erschaffe Station",aStationName);
+			$.getJSON("https://webtechlecture.appspot.com/cloudstore/add?owner=19_stationen&jsonstring="+encodeURIComponent(JSON.stringify({"StationName" : aStationName, "bikes":[]}))+"&key="+aStationName+"&token=R84O2SrCQuX8BLpbCT4sGld4xZI_", function(data) {
+			console.log(data)
+	});	
+		}
+		
+		function onCreateBike(aBikeID,aStationName)
+		{
+			console.log("erschaffe Bike",aBikeID,"in",aStationName);
+			$.getJSON("https://webtechlecture.appspot.com/cloudstore/add?owner=19_bikes&jsonstring="+encodeURIComponent(JSON.stringify({"BikeID": aBikeID, "StationName":aStationName}))+"&key="+aBikeID+"&token=5nkgQccTg7unAnmmlSlEvR3i7_I_", function(data) {
+			console.log(data)
+	});	
+		$.getJSON("https://webtechlecture.appspot.com/cloudstore/get?owner=19_stationen&key="+aStationName, function(stationData) {
+				console.log(stationData)
+				stationData.bikes.push(aBikeID)
+				$.getJSON("https://webtechlecture.appspot.com/cloudstore/add?owner=19_stationen&key="+aStationName+"&jsonstring="+encodeURIComponent(JSON.stringify(stationData))+"&token=R84O2SrCQuX8BLpbCT4sGld4xZI_",function(resultData){
+					console.log(resultData)
+				})
+		});
+		}
+
+		
+	</script>
+	
+  </body>
+</html>

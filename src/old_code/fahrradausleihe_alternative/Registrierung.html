@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="lib/bootstrap_v4.min.css">
+
+    <title>Kundenregistrierung</title>
+	
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="lib/jquery_v3.2.1.min.js"></script>
+    <script src="lib/popper_v1.12.9.min.js"></script>
+    <script src="lib/bootstrap_v4.min.js" ></script>
+	<script src="lib/elaspix_lookupDropdown.js" ></script>
+	<script src="lib/elaspix_inputtext.js" ></script>
+	<script src="lib/elaspix_eventclock.js" ></script>
+	<script src="lib/elaspix_dropdown_desktop.js" ></script>
+	<script src="lib/elaspix_register.js" ></script>	
+	<script src="lib/jquery.md5.js" ></script>
+	
+  </head>
+  <body>
+    <div class="container">
+		<div class="jumbotron mt-4">
+		  <h1 class="display-4">Registrierung</h1>
+		  <p class="lead">Kunden können sich registieren.</p>		  
+		</div>
+		<div id="parent"></div>
+	</div>
+	
+	<script>
+		var registration;
+		$(function(){
+			registration=createRegister({
+					"parent":$("#parent"),
+					"onRegister":onRegister
+		})
+		
+		});
+		
+		function onRegister(aData)
+		{
+			aData["bikes"] = []
+			console.log("Kunden will sich registrieren mit Daten",aData);
+			$.getJSON("https://webtechlecture.appspot.com/cloudstore/add?owner=19_kunden&jsonstring="+encodeURIComponent(JSON.stringify(aData))+"&key="+aData.email+"&token=FtyelhCI49sIMP0VSZiuazbD1ow_", function(data) {
+			console.log(data)
+	});	
+		}
+	</script>
+	
+  </body>
+</html>
