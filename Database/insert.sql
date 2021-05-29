@@ -13,7 +13,7 @@ VALUES
 
 INSERT INTO EMPLOYEE (s_first_name, s_last_name, dt_date_of_birth, n_branch_id, n_salary, n_commission, n_address_id)
 VALUES
-('Aykut', 'Anhan', DATE '1985-12-16', 1, 20000.00, 0.5, 1),
+('Jon', 'James', DATE '1985-12-16', 1, 20000.00, 0.5, 1),
 ('Michael', 'Kurt', DATE '1995-05-10', 2, 20000.00, 0.5, 2),
 ('Aylin', 'Bauer', DATE '1989-01-01', 2, 50000.00, 0.5, 3);
 

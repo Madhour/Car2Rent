@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{url_for('static', filename='icon.ico')}}">
 
-    <title>CarRent</title>
+    <title>Car2Rent</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/dashboard/">
 
@@ -21,8 +21,7 @@
 
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{url_for('index')}}">CarRent</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{url_for('manager_dashboard')}}">Car2Rent</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
         </li>
@@ -61,18 +60,12 @@
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>CRUD</span>
+              <span>Actions</span>
               <a class="d-flex align-items-center text-muted" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('new_customer')}}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                  New Customer
-                </a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('new_rent')}}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
@@ -80,15 +73,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url_for('return_car')}}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                  Return Car
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link active" href="{{url_for('update_customer_rent')}}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                  Update Customer Rent <span class="sr-only">(current)</span>
+                  Manage Rents <span class="sr-only">(current)</span>
                 </a>
               </li>
             </ul>
@@ -97,131 +84,32 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2"></h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
-              </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                This week
-              </button>
-            </div>
+            <h1>Manage active rents</h1>
           </div>
 
           <div class="container-xxl">
             <div class="table-responsive">
-              <div class="table-wrapper">
-                <div class="table-title">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <h2>Manage <b>Customer Rent</b></h2>
-                    </div>
-                  </div>
-                </div>
-                <table class="table table-striped table-hover">
+              <div class="table-responsive" id="Table">
+                <table class="table table-striped table-sm">
                   <thead>
                     <tr>
-                      <th>
-                        <span class="custom-checkbox">
-                          <input type="checkbox" id="selectAll">
-                          <label for="selectAll"></label>
-                        </span>
-                      </th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Address</th>
-                      <th>Phone</th>
-                      <th>Actions</th>
+                      <th></th>
+                      <th></th>
+                      <th>Car ID</th>
+                      <th>Duration</th>
+                      <th>Free Kilometers</th>
+                      <th>Customer ID</th>
+                      <th>Employee ID</th>
+                      <th>Is Returned?</th>
+                      <th>Date Rented</th>
+                      <th>Date Returned</th>
+                      <th>Employee ID returned</th>
+                      <th>Mileage returned</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <span class="custom-checkbox">
-                          <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                          <label for="checkbox1"></label>
-                        </span>
-                      </td>
-                      <td>Thomas Hardy</td>
-                      <td>thomashardy@mail.com</td>
-                      <td>89 Chiaroscuro Rd, Portland, USA</td>
-                      <td>(171) 555-2222</td>
-                      <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="custom-checkbox">
-                          <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                          <label for="checkbox2"></label>
-                        </span>
-                      </td>
-                      <td>Dominique Perrier</td>
-                      <td>dominiqueperrier@mail.com</td>
-                      <td>Obere Str. 57, Berlin, Germany</td>
-                      <td>(313) 555-5735</td>
-                      <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="custom-checkbox">
-                          <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                          <label for="checkbox3"></label>
-                        </span>
-                      </td>
-                      <td>Maria Anders</td>
-                      <td>mariaanders@mail.com</td>
-                      <td>25, rue Lauriston, Paris, France</td>
-                      <td>(503) 555-9931</td>
-                      <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="custom-checkbox">
-                          <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                          <label for="checkbox4"></label>
-                        </span>
-                      </td>
-                      <td>Fran Wilson</td>
-                      <td>franwilson@mail.com</td>
-                      <td>C/ Araquil, 67, Madrid, Spain</td>
-                      <td>(204) 619-5731</td>
-                      <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                      </td>
-                    </tr>					
-                    <tr>
-                      <td>
-                        <span class="custom-checkbox">
-                          <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                          <label for="checkbox5"></label>
-                        </span>
-                      </td>
-                      <td>Martin Blank</td>
-                      <td>martinblank@mail.com</td>
-                      <td>Via Monte Bianco 34, Turin, Italy</td>
-                      <td>(480) 631-2097</td>
-                      <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                      </td>
-                    </tr> 
                   </tbody>
                 </table>
-                <div class="clearfix">
-                  <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                </div>
               </div>
             </div>        
           </div>
@@ -318,5 +206,53 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{url_for('static', filename='bootstrap.js')}}"></script>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+    <script>
+    function loadTable(rent_id, car_id, duration, free_kilometers, customer_id, employee_id, is_returned, date_rented, date_returned, employee_id_returned, mileage_returned)
+		{
+      console.log('begin')
+        $(rent_id).each(function(i, entry){
+          $("#Table").find('tbody')
+            .append($('<tr>')
+                .append($('<td>').append('<button onclick="updateRent('+entry+')" class="btn btn-outline-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16"><path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/></svg></svg></button>'))
+                .append($('<td>').append('<button onclick="returnCar('+entry+')" class="btn btn-outline-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">   <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>   <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/> </svg></button>'))
+                //.append($('<td>').text(rent_id[i]))  
+                .append($('<td>').text(car_id[i]))
+                .append($('<td id='+entry+'>').text(duration[i]))
+                .append($('<td>').text(free_kilometers[i]))
+                .append($('<td>').text(customer_id[i]))
+                .append($('<td>').text(employee_id[i]))
+                .append($('<td>').text(is_returned[i]))
+                .append($('<td>').text(date_rented[i]))
+                .append($('<td>').text(date_returned[i]))
+                .append($('<td>').text(employee_id_returned[i]))
+                .append($('<td>').text(mileage_returned[i]))
+        );
+      });
+		};
+    loadTable({{rent_id}}, {{car_id}}, {{duration}}, {{free_kilometers}}, {{customer_id}}, {{employee_id}}, {{is_returned| tojson | safe}}, {{date_rented| tojson | safe}}, {{date_returned| tojson | safe}}, {{employee_id_returned| tojson | safe}}, {{mileage_returned| tojson | safe}})
 
+    function updateRent(aData){
+      formstring = 
+      '       <form action="/update_rent/'+aData+'" method="post">\
+              <input type="number" name="duration" placeholder="new duration" required>\
+              <br><br>\
+              <input type="submit" name="" value="save" class="btn btn-outline-dark">\
+        </form>'
+      $("#"+aData).append(formstring)
+    };
+
+    function returnCar(aData){
+      rentID = aData
+      eID = window.prompt("ID of employee handling the return",1);
+      mileage = window.prompt("New mileage of car",100000);
+      comment = window.prompt("Comment","Everything is good"); 
+      $.post("/return_rent/"+rentID+"/"+eID+"/"+mileage+"/"+JSON.stringify(comment), function(response)
+		{
+      location.reload()
+		})
+    };
+
+    </script>
 </body></html>
