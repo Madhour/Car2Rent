@@ -57,13 +57,3 @@ INSERT INTO PAYMENT (n_rent_id, n_payment_amount, d_payment_date)
 VALUES
 (1, 1250.00, DATE '2021-05-12'),
 (2, 99.00, DATE '2021-05-12');
-
-/*
-- procedures/transactions are part of database not of application!!
-- doesn't have to be executed from application
-
-- So Queries should be in sql file or in application?
-    - 
-- Do Transactions have to be in application?
-    - 
-*/
