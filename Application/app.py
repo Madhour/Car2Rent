@@ -1,16 +1,8 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask import Flask, render_template, request, redirect
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms import SubmitField, SelectField, RadioField, HiddenField, StringField, IntegerField, FloatField
-from wtforms.validators import InputRequired, Length, Regexp, NumberRange
 from datetime import datetime
-from datetime import date
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from decimal import Decimal
 
 app = Flask(__name__)
 Bootstrap(app)
