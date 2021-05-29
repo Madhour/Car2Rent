@@ -9,7 +9,8 @@ VALUES
 INSERT INTO BRANCH (n_manager_id, n_parking_spaces, n_address_id)
 VALUES
 (null, 10, 1),
-(null, 4, 2);
+(null, 4, 2),
+(null, 3, 3);
 
 INSERT INTO EMPLOYEE (s_first_name, s_last_name, dt_date_of_birth, n_branch_id, n_salary, n_commission, n_address_id)
 VALUES
