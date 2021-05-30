@@ -3,23 +3,32 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import os
 
 app = Flask(__name__)
-Bootstrap(app)
+#Bootstrap(app)
 db = SQLAlchemy(app)
 
-engine = create_engine('postgresql://postgres@localhost/carrent')
+#engine = create_engine('postgresql://postgres@localhost:5432/carrent')
+engine = create_engine('postgresql://postgres:car2rent@database:5432/postgres')
 
 Session = sessionmaker(bind=engine)
 
 session = Session()
 
 
+#init db
+try:
+    engine.execute("SELECT * FROM RENT where n_rent_id = 1;")
+except:
+    sql_statement = open("./db/init.sql", "r").read()
+    engine.execute(sql_statement)
+
+
 #Routes
 @app.route("/")
 def index():
-    cNewAddress()
-    return render_template('index.html')
+    return manager_dashboard()
 
 @app.route("/new_rent")
 def new_rent():
@@ -60,7 +69,7 @@ def delete_Car(id):
         update = engine.execute("DELETE FROM CAR WHERE n_car_id = %s;" %(id))
     except:
         update = engine.execute("UPDATE CAR SET b_is_available = false WHERE n_car_id = %s;" %(id))
-    return "success"
+    return list_cars()
 
 
 @app.route("/update_rent/<int:rentid>", methods=["POST","GET"])
@@ -199,7 +208,7 @@ def qListCustomers():
 #Create
 @app.route("/add_car", methods=["POST","GET"])
 def add_car():
-    brand = request.form['Brand']
+    brand = request.form['carBrand']
     mileage = request.form['Mileage']
     date_bought = request.form['Date']
     price = request.form['Price']
@@ -265,4 +274,4 @@ def add_rent():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0')

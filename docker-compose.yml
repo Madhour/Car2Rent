@@ -1,0 +1,23 @@
+version: "3.8"
+
+
+services:
+    database:
+        container_name: database
+        environment:
+            - POSTGRES_PASSWORD=car2rent
+        image: 'postgres:13.3'
+        depends_on:
+            - flask
+        ports:
+            - '5433:5432'
+
+    flask:
+        container_name: flask
+        build: ./Application
+        restart: always
+        ports:
+            - '5000:5000'
+
+
+    
