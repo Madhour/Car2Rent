@@ -1,4 +1,4 @@
-![Logo](https://github.com/Madhour/CarRent/blob/main/Archive/Application/client/static/Logo_v2.png?raw=true)
+![Logo](/Docs/assets/Logo_v2.png)
 ===
 
 ## Usage 
