@@ -3,10 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import os
+
+
+'''
+DEPRECEATED
+
+USE /Application/run.py
+
+'''
+
+
 
 app = Flask(__name__)
-#Bootstrap(app)
 db = SQLAlchemy(app)
 
 #engine = create_engine('postgresql://postgres@localhost:5432/carrent')
