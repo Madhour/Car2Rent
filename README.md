@@ -22,7 +22,7 @@ The App is now up and running under ```localhost:5000```.
 
 # Introduction
 
-Car2Rent is an application made for car rental services. It comes with a dashboard based on [ChartJS](https://www.google.com) and several basic CRUD functionalities. Supported actions are:
+Car2Rent is an application made for car rental services. It comes with a dashboard based on [ChartJS](https://www.chartjs.org) and several basic CRUD functionalities. Supported actions are:
 - adding customers, cars, rents
 - removing or hiding cars
 - modifying/update (active) rents, e.g. add more time
