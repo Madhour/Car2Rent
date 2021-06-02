@@ -1,5 +1,6 @@
 DROP VIEW IF EXISTS car_overview;
 ALTER TABLE IF EXISTS EMPLOYEE DROP CONSTRAINT IF EXISTS branch_emp;
+DROP INDEX IF EXISTS IX_Rent;
 DROP TABLE IF EXISTS PAYMENT;
 DROP TABLE IF EXISTS RENT;
 DROP TABLE IF EXISTS MAINTAINS;
@@ -44,8 +45,8 @@ CREATE TABLE CUSTOMER
 n_customer_id 	SERIAL UNIQUE		NOT NULL,
 s_first_name 	VARCHAR(128) 		NOT NULL,
 s_last_name   VARCHAR(128)			NOT NULL,
-dt_date_of_birth  DATE,
-s_license_id   VARCHAR(3),
+dt_date_of_birth  DATE  NOT NULL,
+s_license_id   VARCHAR(3) NOT NULL,
 n_address_id	INT,
 PRIMARY KEY (n_customer_id),
 FOREIGN KEY (n_address_id) REFERENCES ADDRESSES(n_address_id) 
@@ -111,12 +112,12 @@ n_employee_id   INT     NOT NULL,
 b_is_returned           BOOL              NOT NULL DEFAULT false, 
 d_date_rented         DATE             NOT NULL DEFAULT CURRENT_DATE,
 d_date_returned     DATE,
-n_employee_id_returned INT,
+n_employee_id_returned INT NOT NULL,
 n_mileage_returned INT,
 PRIMARY KEY (n_rent_id),
 FOREIGN KEY (n_car_id) REFERENCES CAR(n_car_id),
 FOREIGN KEY (n_customer_id) REFERENCES CUSTOMER(n_customer_id), 
-FOREIGN KEY (n_employee_id) REFERENCES EMPLOYEE(n_employee_id) 
+FOREIGN KEY (n_employee_id) REFERENCES EMPLOYEE(n_employee_id)
 );
 
 
@@ -133,13 +134,18 @@ ALTER TABLE EMPLOYEE
     ADD CONSTRAINT branch_emp 
     FOREIGN KEY (n_branch_id) REFERENCES BRANCH(n_branch_id);
 
+CREATE UNIQUE INDEX IX_Rent --This ensures that every customer can only have one active rent at a time
+ON RENT(n_customer_id, b_is_returned)
+WHERE b_is_returned = false;
+
+
 
 INSERT INTO ADDRESSES (s_street, s_house_number, s_city, s_country, n_zipcode)
 VALUES
 ('Coblitzallee', 1, 'Mannheim', 'Germany', 68163),
 ('Hans-Thoma-Straße', 2, 'Mannheim', 'Germany', 68163),
-('Mannheimerstraße', 14, 'Kaiserslautern', 'Germany', 67655),
-('Broadway', 13, 'New York', 'USA', 10007);
+('Mainzer Landstraße', 14, 'Frankfurt', 'Germany', 65933),
+('Apple Campus', 2, 'Cupertino', 'USA', 1011);
 
 INSERT INTO BRANCH (n_manager_id, n_parking_spaces, n_address_id)
 VALUES

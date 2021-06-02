@@ -45,8 +45,8 @@ CREATE TABLE CUSTOMER
 n_customer_id 	SERIAL UNIQUE		NOT NULL,
 s_first_name 	VARCHAR(128) 		NOT NULL,
 s_last_name   VARCHAR(128)			NOT NULL,
-dt_date_of_birth  DATE,
-s_license_id   VARCHAR(3),--customers need a license class b to rent car
+dt_date_of_birth  DATE  NOT NULL,
+s_license_id   VARCHAR(3) NOT NULL,--customers need a license class b to rent car
 n_address_id	INT,
 PRIMARY KEY (n_customer_id),
 FOREIGN KEY (n_address_id) REFERENCES ADDRESSES(n_address_id) 
