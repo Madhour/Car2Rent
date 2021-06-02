@@ -6,13 +6,14 @@ from sqlalchemy.orm import sessionmaker
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
+#connect to docker postgres db
 engine = create_engine('postgresql://postgres:car2rent@database:5432/postgres')
 
 Session = sessionmaker(bind=engine)
 
 session = Session()
 
-#init db
+#init db; Fill with data dump if empty
 try:
     engine.execute("SELECT * FROM RENT where n_rent_id = 1;")
 except:

@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request
 from app import app, engine, session, views
 from datetime import datetime
 
-#Queries
+#Lists the total revenue by branch
 def qSalesPerBranch():
     salesPerBranch = engine.execute(
     'SELECT b.n_branch_id, COALESCE(CAST(SUM(amount) as FLOAT), 0)\
@@ -15,6 +15,7 @@ def qSalesPerBranch():
     revenue = [row[1] for row in salesPerBranch]
     return branch, revenue
 
+#Lists the rent history
 def qRents():
     rents = engine.execute(
     '''
@@ -36,6 +37,7 @@ def qRents():
 
     return rent_id, car_id, duration, free_kilometers, customer_id, employee_id, is_returned, date_rented, date_returned, employee_id_returned, mileage_returned
 
+#Lists all active rents
 def qRentsActive():
     rents = engine.execute(
     '''
@@ -58,7 +60,7 @@ def qRentsActive():
 
     return rent_id, car_id, duration, free_kilometers, customer_id, employee_id, is_returned, date_rented, date_returned, employee_id_returned, mileage_returned
 
-
+#Lists the sales per employee
 def qSalesPerEmployee():
     salesPerEmployee = engine.execute(
     "SELECT e.s_first_name ||' '|| e.s_last_name AS employee_Name, COALESCE(CAST(sum(p.n_payment_amount) as FLOAT), 0) AS revenue, COALESCE(CAST(COUNT(r.n_rent_id) AS INT), 0) AS sales\
@@ -71,6 +73,7 @@ def qSalesPerEmployee():
     sales = [row[2] for row in salesPerEmployee]
     return employee, revenue, sales
 
+#Lists all available cars
 def qListCars():
     listCars = engine.execute(
     'SELECT * FROM CAR WHERE b_is_available = true ORDER BY n_car_id;').fetchall()
@@ -85,9 +88,10 @@ def qListCars():
 
     return car_id, brand, mileage, date_bought, price_id, branch_id, is_available
 
+#Lists all customers of the company
 def qListCustomers():
     listCustomers = engine.execute(
-    "SELECT c.n_customer_id, c.s_first_name, c.s_last_name, c.dt_date_of_birth, c.s_license_id, a.s_street ||' '|| a.s_house_number as address FROM CUSTOMER as c LEFT JOIN addresses as a ON (c.n_address_id = a.n_address_id);").fetchall()
+    "SELECT c.n_customer_id, c.s_first_name, c.s_last_name, c.d_date_of_birth, c.s_license_id, a.s_street ||' '|| a.s_house_number as address FROM CUSTOMER as c LEFT JOIN addresses as a ON (c.n_address_id = a.n_address_id);").fetchall()
 
     customer_id = [row[0] for row in listCustomers]
     fname = [row[1] for row in listCustomers]
@@ -95,7 +99,6 @@ def qListCustomers():
     dob = [row[3] for row in listCustomers]
     license_id = [row[4] for row in listCustomers]
     address = [row[5] for row in listCustomers]
-
 
     return customer_id, fname, lname, dob, license_id, address
 
