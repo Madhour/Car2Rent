@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 '''
-DEPRECEATED
+WARNING: DEPRECEATED
 
 USE /Application/run.py
 
