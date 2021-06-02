@@ -77,6 +77,8 @@ According to Codd, a table is in 3NF if and only if:
 To ensure at least 2NF, the addresses are kept in separate tables and are refered to via a Foreign Key. The payments were split from the rents and are now maintained in a separate table, so that every payment is only dependent on the Primary Key of the table payment. Prices are stored in a separate table as well.
 
 Every non-prime attribute is non-transitively dependent on every PK of the resepective table. This was achieved by splitting the table in such a way that every attribute can only be uniquely identified by the PK. In the table "Price" the attribute price_class shouldn't be confused with an identifier and is to be seen as a name for the row. Because it might be possible to have another instance with the same value for price_class, e.g. in case of a special offer (a new row with the same price_class but different prices per day), there is no transitive dependency between that attribute and other attributes of the table.
- 
+
+### Misc
+
 Furthermore, during the design of the database, attributes were chosen in such a way that every attribute is atomic. Redundancies were removed by splitting the tables and adding new relations (e.g. addresses). 
-Although some guidelines suggest that adding data type prefixes isn't recommended, they are included for convenience during the coding process. When handling queries in Flask, it's easier to directly know what datatype is to be expected instead of going back and forth between the python code and the database dump file to cross check.
+Although some guidelines suggest that adding data type prefixes isn't recommended, they were included for convenience during the coding process. When handling queries in Flask, it's easier to directly know what datatype is to be expected instead of going back and forth between the python code and the database dump file to cross check.
