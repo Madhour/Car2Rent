@@ -1,4 +1,4 @@
-![Logo](/Docs/assets/Logo_v3.png)
+![Logo](https://github.com/Madhour/Car2Rent/blob/main/Docs/assets/logo_v3.png)
 
 
 <p align="center">
