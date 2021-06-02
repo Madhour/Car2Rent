@@ -15,7 +15,7 @@ SELECT
     c.n_car_id AS car_ID,
     c.s_brand AS car_Brand,
     c.n_mileage AS car_Mileage,
-    c.dt_date_bought AS Year_Of_Manufacture,
+    c.d_date_bought AS Year_Of_Manufacture,
     a.s_street || ' ' || a.s_house_number AS car_location
 FROM
     CAR AS c
@@ -142,7 +142,7 @@ SELECT
 FROM
     CAR
 WHERE
-    dt_date_bought >= DATE '2010-01-01';
+    d_date_bought >= DATE '2010-01-01';
 
 --6.2) Lists all rents made in the first seven days of the month of may
 SELECT

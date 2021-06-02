@@ -27,7 +27,7 @@ CREATE TABLE EMPLOYEE (
     n_employee_id serial UNIQUE NOT NULL,
     s_first_name varchar(128) NOT NULL,
     s_last_name varchar(128) NOT NULL,
-    dt_date_of_birth date,
+    d_date_of_birth date,
     n_branch_id int NOT NULL,
     n_salary numeric(15, 2) NOT NULL,
     n_commission numeric(3, 3),
@@ -40,7 +40,7 @@ CREATE TABLE CUSTOMER (
     n_customer_id serial UNIQUE NOT NULL,
     s_first_name varchar(128) NOT NULL,
     s_last_name varchar(128) NOT NULL,
-    dt_date_of_birth date NOT NULL,
+    d_date_of_birth date NOT NULL,
     s_license_id varchar(3) NOT NULL,
     n_address_id int,
     PRIMARY KEY (n_customer_id),
@@ -70,7 +70,7 @@ CREATE TABLE CAR (
     n_car_id serial UNIQUE NOT NULL,
     s_brand varchar(13),
     n_mileage int,
-    dt_date_bought date,
+    d_date_bought date,
     n_price_id int NOT NULL,
     n_branch_id int NOT NULL,
     b_is_available bool NOT NULL,
@@ -137,7 +137,7 @@ INSERT INTO BRANCH (n_manager_id, n_parking_spaces, n_address_id)
     (NULL, 4, 2), 
     (NULL, 3, 3);
 
-INSERT INTO EMPLOYEE (s_first_name, s_last_name, dt_date_of_birth, n_branch_id, n_salary, n_commission, n_address_id)
+INSERT INTO EMPLOYEE (s_first_name, s_last_name, d_date_of_birth, n_branch_id, n_salary, n_commission, n_address_id)
     VALUES 
     ('Jon', 'James', DATE '1985-12-16', 1, 20000.00, 0.5, 1), 
     ('Michael', 'Kurt', DATE '1995-05-10', 2, 20000.00, 0.5, 2), 
@@ -154,12 +154,12 @@ INSERT INTO PRICE (s_price_class, n_price_per_day, n_price_per_kilometer, n_secu
     ('Business Line', 250.00, 0.3, 1000.00), 
     ('Economic Line', 99.00, 0.3, 0.00);
 
-INSERT INTO CUSTOMER (s_first_name, s_last_name, dt_date_of_birth, s_license_id, n_address_id)
+INSERT INTO CUSTOMER (s_first_name, s_last_name, d_date_of_birth, s_license_id, n_address_id)
     VALUES 
     ('Jan', 'Müller', DATE '1989-12-12', 'B', 4), 
     ('Silvie', 'Müller', DATE '1990-01-12', 'BE', 4);
 
-INSERT INTO CAR (s_brand, n_mileage, dt_date_bought, n_price_id, n_branch_id, b_is_available)
+INSERT INTO CAR (s_brand, n_mileage, d_date_bought, n_price_id, n_branch_id, b_is_available)
     VALUES 
     ('Mercedes', 200000, DATE '2002-01-01', 1, 1, FALSE), 
     ('Opel', 150000, DATE '2012-01-01', 2, 1, FALSE), 
