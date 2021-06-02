@@ -29,9 +29,9 @@ Car2Rent is an application made for car rental services. It comes with a dashboa
 - Listing all customers, (available) cars, rents
 
 
-The application is based on the powerful, open source DBMS, [Postgres](https://www.postgresql.org/). The backend was implemented using pythons [Flask](https://flask.palletsprojects.com/en/2.0.x/) webframework. The Flask<>database communication is enabled through [psycopg](https://www.psycopg.org/), a PostgreSQL driver for python, and [sqlalchemy](https://www.sqlalchemy.org/).
+The application is based on the powerful, open source DBMS, [Postgres](https://www.postgresql.org/). The backend was implemented using pythons [Flask](https://flask.palletsprojects.com/en/2.0.x/) webframework. The Flask<>database communication is enabled through [psycopg](https://www.psycopg.org/), a PostgreSQL driver for python, and [sqlalchemy](https://www.sqlalchemy.org/). To focus entirely on the (database) functionalities, the app/frontend is based on a bootstrap template which can be found [here](https://getbootstrap.com/docs/4.1/examples/).
 
-**Note:** This Application is not intended for production deployment and thus isn't secured against injection attacks.
+**Note:** This Application is not intended for production deployment and thus isn't secured against injection attacks!
 
 
 # Database 
@@ -78,6 +78,5 @@ To ensure at least 2NF, the addresses are kept in separate tables and are refere
 
 Every non-prime attribute is non-transitively dependent on every PK of the resepective table. This was achieved by splitting the table in such a way that every attribute can only be uniquely identified by the PK. In the table "Price" the attribute price_class shouldn't be confused with an identifier and is to be seen as a name for the row. Because it might be possible to have another instance with the same value for price_class, e.g. in case of a special offer (a new row with the same price_class but different prices per day), there is no transitive dependency between that attribute and other attributes of the table.
  
- Furthermore, during the design of the database, attributes were chosen in such a way that every attribute is atomic and redundancies were removed by splitting the tables and adding new relations (e.g. addresses). 
- Although some guidelines suggest that adding data type prefixes isn't recommended, I decided to include them for convenience during the coding process. 
- When handling queries in Flask, it's easier to directly know what datatype is to be expected instead of going back and forth between the python code and the database dump file to cross check.
+Furthermore, during the design of the database, attributes were chosen in such a way that every attribute is atomic. Redundancies were removed by splitting the tables and adding new relations (e.g. addresses). 
+Although some guidelines suggest that adding data type prefixes isn't recommended, they are included for convenience during the coding process. When handling queries in Flask, it's easier to directly know what datatype is to be expected instead of going back and forth between the python code and the database dump file to cross check.
