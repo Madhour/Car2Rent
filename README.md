@@ -56,14 +56,15 @@ The application is based on the powerful, open source DBMS, [Postgres](https://w
 
 - Customers, Employees and Branches have addresses that are tracked separately. This is useful because it ensures that every address follows the same format/structure.
 <br><br>
+
 ## ER-Model
 <br>
 
-![ER](Database/erm/ERM_Final.png)
+![ER](Database/design/ERM_Final.png)
 <br>
 
 ## Relational-Model
-![ER](Database/erm/3_Normalform.png)
+![ER](Database/design/3_Normalform.png)
 
 
 ## Database design explanation
@@ -82,3 +83,12 @@ Every non-prime attribute is non-transitively dependent on every PK of the resep
 
 Furthermore, during the design of the database, attributes were chosen in such a way that every attribute is atomic. Redundancies were removed by splitting the tables and adding new relations (e.g. addresses). 
 Although some guidelines suggest that adding data type prefixes isn't recommended, they were included for convenience during the coding process. When handling queries in Flask, it's easier to directly know what datatype is to be expected instead of going back and forth between the python code and the database dump file to cross check.
+
+### Queries
+- can be found in [/Application/db/select.sql](./Application/db/select.sql)
+
+### Views, Functions, Triggers, etc. 
+- can be found in [/Application/db/init.sql](./Application/db/init.sql)
+
+### Transactions
+- can be found in [/Application/db/transaction.sql](./Application/db/transaction.sql)
