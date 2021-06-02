@@ -1,108 +1,83 @@
-![Logo](/Docs/assets/Logo_v2.png)
-===
+![Logo](/Docs/assets/Logo_v3.png)
 
-## Usage 
 
-To use the Application a Docker Container needs to be started as in the following.
+<p align="center">
+<img src="https://img.shields.io/badge/Python-grey?style=flat-square&logo=Python"/>
+<img src="https://img.shields.io/badge/Postgres-grey?style=flat-square&logo=Postgresql"/>
+<img src="https://img.shields.io/badge/JavaScript-grey?style=flat-square&logo=Javascript"/>
+<img src="https://img.shields.io/badge/Chart.js-grey?style=flat-square&logo=chart-dot-js"/>
+<img src="https://img.shields.io/badge/Bootstrap-grey?style=flat-square&logo=Bootstrap">
+<img src="https://img.shields.io/badge/Docker-grey?style=flat-square&logo=Docker"/>
+<img src="https://img.shields.io/badge/Flask-v2.0.1-g?style=flat-square&logo=Flask"/></p>
 
+# Usage 
+
+This Application is dockerized, simply start the container using:
 ```bash
-cd services/web
-
-docker-compose exec web python manage.py create_db
+docker-compose up
 ```
-
-##  Used Technologies
-
-Python 3.9.5 ; Flask 1.1.2 ; SQLAlchemy 2.5.1; psycopg2 2.8.6
+The App is now up and running under ```localhost:5000```.
 
 
 
-## Table of Contents
-- [Introduction](#Introduction)
-- [Team](#Team)
-- [Application](#Application)
-  - [Specification](#Specification)
-  - [ERM](#ERM)
-  - [Normalization](#Normalization)
-  - [Backend](#Backend)
-  - [Frontend](#Frontend)  
-- [Learnings](#Learnings)
+# Introduction
 
-## Introduction
+Car2Rent is an application made for car rental services. It comes with a dashboard based on [ChartJS](https://www.google.com) and several basic CRUD functionalities. Supported actions are:
+- adding customers, cars, rents
+- removing or hiding cars
+- modifying/update (active) rents, e.g. add more time
+- Listing all customers, (available) cars, rents
 
-Car rental services aren´t always that easy to manage. Most importantly when it comes to handling a massive Dataload of Customers, their Adresses, Transactions, the Fleet and so on. CarRent is a WebApp for Employees of Car Renting Companies that exactly solves that provblem. It is build to support the employees with the feature to grow if the Rental company needs to switch or buy new cars.
 
-## Team
+The application is based on the powerful, open source DBMS, [Postgres](https://www.postgresql.org/). The backend was implemented using pythons [Flask](https://flask.palletsprojects.com/en/2.0.x/) webframework. The Flask<>database communication is enabled through [psycopg](https://www.psycopg.org/), a PostgreSQL driver for python, and [sqlalchemy](https://www.sqlalchemy.org/).
 
-- [Ayman Madhour](https://github.com/Madhour)
-- [Lukas Bach](https://github.com/lukasbach00)
-- [Jorgo Paschaloglou](https://github.com/JorgoPascha)
+**Note:** This Application is not intended for production deployment and thus isn't secured against injection attacks.
 
-## Application
 
-The Application is completely Dockerized and uses a Flask server including .html Templates to build the Frontend and connect to the Postgres Database in the Backend. 
+# Database 
+## Specification
 
-### ERM
+- Every car is tracked and categorized by a unique id, several attributes such as "brand" & "mileage" and a boolean attribute "is_available". If the car is already rented, is_available will be 0 otherwise 1.
 
+- Customers are stored with an id, first and last name, license and address. A customer must have a license. The attribute "license_id" contains the class, allowed to drive.
+
+- Employees are stored with an id, several personal information, the branch they work at and the commission they get. An Employee can manage a branch and issue the rentals. Every car return must be overseen by an employee, this is managed by the table "maintains".
+
+- Every Branch is supervised by a manager. A car can be rented from any branch. If a car is rented, the free parking space in that branch is increased. 
+
+- A customer can only rent one car at a time. Mileage_returned is at first null and upon return updated. Every car that is rented must be issued by an employee.
+- The price a customer has to pay is derived from the price of the car. Every car has a price per day and a price per kilometer.
+
+- Prices are usually per day. If a fix amount of free kilometers is exceeded then an additional price is due. (Every car has a fix insurance price.)
+
+- After the rental is returned, the employee has to maintain the car, e.g. clean it and note down any possible damages.
+
+- A rent can have multiple payments, mostly one upon renting and one upon return if the free mileage got exceeded. Then the customer has to pay additional fees upon return.
+
+- Customers, Employees and Branches have addresses that are tracked separately. This is useful because it ensures that every address follows the same format/structure.
 <br><br>
+## ER-Model
+<br>
 
-![ER](https://github.com/Madhour/CarRent/blob/main/Application/database/erm/ERM_Final.png?raw=true)
+![ER](Database/erm/ERM_Final.png)
+<br>
 
-<br><br>
+## Relational-Model
+![ER](Database/erm/3_Normalform.png)
+
+
+## Database design explanation
 
 ### Normalization
 
-<br><br>
+According to Codd, a table is in 3NF if and only if:
+ 1. The relation is in second normal form
+ 2. Every non-prime attribute of relation R is non-transitively dependent on every key of R
 
-![Norm](https://github.com/Madhour/CarRent/blob/main/Application/database/erm/3_Normalform-Page-1.png?raw=true)
+To ensure at least 2NF, the addresses are kept in separate tables and are refered to via a Foreign Key. The payments were split from the rents and are now maintained in a separate table, so that every payment is only dependent on the Primary Key of the table payment. Prices are stored in a separate table as well.
 
-## Backend 
-
-### Specification
-
-Cars: car_id, brand, mileage, date_bought, price_id, branch_id, is_available (available/already rented)
-- Every car is tracked and categorized by the above mentioned values. If it is already rented is_available will be 0 otherwise 1.
----
-
-Customer: customer_id, first_name, last_name, date_of_birth, license_id, adress_id
-- Customers are stored by customer_id, etc. A customer must have a license. The attribute "license_id" contains the class, allowed to drive.
----
-
-Employee: employee_id, first_name, last_name, date_of_birth, branch_id, salary, commision, adress_id
-- Employees are tracked as well. An Employee can manage a branch and issues the rental.
----
-
-Branch: branch_id, manager_id, parking_spaces, adress_id
-- Every location is supervised by a manager. A car can be rented from any branch. If a car is rented, the free parking space is increased
----
-
-Rent: rent_id, car_id, duration, free_kilometers, customer_id, employee_id, is_returned, date_rented, date_returned, employee_id_returned, mileage_returned
-- A customer can only rent one car. mileage_returned is at first null and upon return updated. Every car that is rented must be issued by an employee.
-- The price is derived from the car price which is stored in another table "Price".
----
-
-Price: price_id, price_class, price_per_day, price_per_kilometer, security_deposit
-- Prices are usually per day. If a fix amount of kilometers is exceeded then an additional price is due.d (Every car has a fix insurance price.)
----
-
-Maintains: maintain_id, employee_id, car_id, comment, date_maintained
-- After the rental is returned, the employee has to maintain the car, e.g. clean it and note down any possible damages
----
-
-Payment: rent_id, payment_amount, payment_date
-- Every rent has a payment. If a certain km amount was exceeded, then the customer has to pay additional fees upon return
----
-
-Addresses: address_id, street, house_number, city, country, zipcode
-- Customers, Employees and Branches refer to addresses. This is useful because it ensures that every address follows the same format/structure
----
-
-## Frontend
-
-![Frontend](https://github.com/Madhour/CarRent/blob/main/Application/client/static/Frontend.PNG?raw=true)
-
-The Frontend uses Flask to provide the routing and functionality of the application. Therefore the user gets directed to the action Fields: Insert; Edit/Delete and Read.
-Using the predefined SQL Querys the User can See all Entries in table Cars for example to See the whole fleet. In addition to that the entries can be filtered. Through a creation form the user can add a new Car if the Company buys a new car. The Employee can change an entry if a customer rents a car.
-
-## Learnings
-
+Every non-prime attribute is non-transitively dependent on every PK of the resepective table. This was achieved by splitting the table in such a way that every attribute can only be uniquely identified by the PK. In the table "Price" the attribute price_class shouldn't be confused with an identifier and is to be seen as a name for the row. Because it might be possible to have another instance with the same value for price_class, e.g. in case of a special offer (a new row with the same price_class but different prices per day), there is no transitive dependency between that attribute and other attributes of the table.
+ 
+ Furthermore, during the design of the database, attributes were chosen in such a way that every attribute is atomic and redundancies were removed by splitting the tables and adding new relations (e.g. addresses). 
+ Although some guidelines suggest that adding data type prefixes isn't recommended, I decided to include them for convenience during the coding process. 
+ When handling queries in Flask, it's easier to directly know what datatype is to be expected instead of going back and forth between the python code and the database dump file to cross check.
