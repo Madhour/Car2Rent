@@ -150,15 +150,15 @@ SELECT
 FROM
     rent
 WHERE
-    d_date_rented BETWEEN DATE '2021-05-01'
-    AND DATE '2021-05-31'
+    d_date_rented BETWEEN DATE '2021-06-01'
+    AND DATE '2021-06-30'
 EXCEPT
 SELECT
     *
 FROM
     rent
 WHERE
-    d_date_rented >= DATE '2021-05-07';
+    d_date_rented >= DATE '2021-06-07';
 
 --7.1) List the total revenue made by employees
 SELECT
