@@ -33,6 +33,7 @@ The application is based on the powerful, open source DBMS, [Postgres](https://w
 
 **Note:** This Application is not intended for production deployment and thus isn't secured against injection attacks!
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/KwAQAnrg7T4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Database 
 ## Specification
