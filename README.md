@@ -31,9 +31,11 @@ Car2Rent is an application made for car rental services. It comes with a dashboa
 
 The application is based on the powerful, open source DBMS, [Postgres](https://www.postgresql.org/). The backend was implemented using pythons [Flask](https://flask.palletsprojects.com/en/2.0.x/) webframework. The Flask<>database communication is enabled through [psycopg](https://www.psycopg.org/), a PostgreSQL driver for python, and [sqlalchemy](https://www.sqlalchemy.org/). To focus entirely on the (database) functionalities, the app/frontend is based on a bootstrap template which can be found [here](https://getbootstrap.com/docs/4.1/examples/).
 
+The video demonstrating the webapp can be found [here](https://youtu.be/KwAQAnrg7T4).
+
 **Note:** This Application is not intended for production deployment and thus isn't secured against injection attacks!
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/KwAQAnrg7T4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 # Database 
 ## Specification
