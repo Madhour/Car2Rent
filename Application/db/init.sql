@@ -162,8 +162,8 @@ INSERT INTO CUSTOMER (s_first_name, s_last_name, d_date_of_birth, s_license_id, 
 INSERT INTO CAR (s_brand, n_mileage, d_date_bought, n_price_id, n_branch_id, b_is_available)
     VALUES 
     ('Mercedes', 200000, DATE '2002-01-01', 1, 1, FALSE), 
-    ('Opel', 150000, DATE '2012-01-01', 2, 1, FALSE), 
-    ('Audi', 150000, DATE '2012-01-01', 3, 2, TRUE);
+    ('Opel', 150000, DATE '2012-01-01', 2, 2, FALSE), 
+    ('Audi', 150000, DATE '2012-01-01', 3, 3, TRUE);
 
 INSERT INTO MAINTAINS (n_employee_id, n_car_id, s_comment, d_date_maintained)
     VALUES 

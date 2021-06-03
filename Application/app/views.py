@@ -138,16 +138,19 @@ def add_rent():
     customer = request.form['customer']
     employee = request.form['employee']
 
-    insert = engine.execute('''
-    BEGIN TRANSACTION;
+    try:
+        insert = engine.execute('''
+        BEGIN TRANSACTION;
 
-    CALL rent_car(%s,%s,%s,%s);
+        CALL rent_car(%s,%s,%s,%s);
 
-    INSERT INTO PAYMENT (n_rent_id, n_payment_amount)
-    VALUES
-    ((SELECT max(n_rent_id) FROM RENT), 
-    %s * (SELECT n_price_per_day FROM CAR LEFT JOIN PRICE ON (CAR.n_price_id = PRICE.n_price_id) WHERE CAR.n_car_id = %s));
+        INSERT INTO PAYMENT (n_rent_id, n_payment_amount)
+        VALUES
+        ((SELECT max(n_rent_id) FROM RENT), 
+        %s * (SELECT n_price_per_day FROM CAR LEFT JOIN PRICE ON (CAR.n_price_id = PRICE.n_price_id) WHERE CAR.n_car_id = %s));
 
-    COMMIT;
-    ''',(carid, customer, employee, duration, duration, carid))
+        COMMIT;
+        ''',(carid, customer, employee, duration, duration, carid))
+    except:
+        pass
     return list_rents()
